@@ -1,1 +1,424 @@
 Dylan vecino garcia 02240132042
+
+
+import math
+import time
+
+
+# 1. Área y perímetro de figuras (menú)
+
+import math
+
+def triangulo():
+    base = float(input("Ingrese la base: "))
+    altura = float(input("Ingrese la altura: "))
+    lado = float(input("Ingrese el lado: "))
+    area = (base * altura) / 2
+    perimetro = base + altura + lado
+    print(f"Área del triángulo: {area}")
+    print(f"Perímetro del triángulo: {perimetro}")
+
+def cuadrado():
+    lado = float(input("Ingrese el lado: "))
+    area = lado ** 2
+    perimetro = 4 * lado
+    print(f"Área del cuadrado: {area}")
+    print(f"Perímetro del cuadrado: {perimetro}")
+
+def circunferencia():
+    radio = float(input("Ingrese el radio: "))
+    area = math.pi * radio ** 2
+    perimetro = 2 * math.pi * radio
+    print(f"Área de la circunferencia: {area}")
+    print(f"Perímetro de la circunferencia: {perimetro}")
+
+while True:
+    print("\n1. Triángulo\n2. Cuadrado\n3. Circunferencia\n4. Salir")
+    opcion = input("Elija una opción: ")
+    if opcion == "1":
+        triangulo()
+    elif opcion == "2":
+        cuadrado()
+    elif opcion == "3":
+        circunferencia()
+    elif opcion == "4":
+        break
+    else:
+        print("Opción inválida")
+
+
+#2 Notas de Estudiantes
+
+
+def calcular_nota_final():
+    p1 = float(input("Nota 1: "))
+    p2 = float(input("Nota 2: "))
+    p3 = float(input("Nota 3: "))
+    return (p1 + p2 + p3) / 3
+
+aprobados = reprobados = total = suma = 0
+
+while True:
+    nombre = input("Nombre del estudiante: ")
+    nota_final = calcular_nota_final()
+    suma += nota_final
+    total += 1
+
+    if nota_final >= 3.0:
+        aprobados += 1
+    else:
+        reprobados += 1
+
+    continuar = input("¿Desea ingresar otro estudiante? (s/n): ")
+    if continuar.lower() != "s":
+        break
+
+print(f"\nTotal estudiantes: {total}")
+print(f"Aprobados: {aprobados}, Reprobados: {reprobados}")
+print(f"Promedio general: {suma/total:.2f}")
+
+
+
+#3 Factorial + pares/impares
+
+
+def factorial(n):
+    resultado = 1
+    for i in range(1, n+1):
+        resultado *= i
+    return resultado
+
+def contar_pares_impares(n):
+    pares = impares = suma_pares = suma_impares = 0
+    for i in range(1, n+1):
+        if i % 2 == 0:
+            pares += 1
+            suma_pares += i
+        else:
+            impares += 1
+            suma_impares += i
+    return pares, impares, suma_pares, suma_impares
+
+n = int(input("Ingrese un número: "))
+print(f"Factorial de {n}: {factorial(n)}")
+pares, impares, suma_pares, suma_impares = contar_pares_impares(n)
+print(f"Pares: {pares}, Impares: {impares}")
+print(f"Suma pares: {suma_pares}, Suma impares: {suma_impares}")
+
+
+#4 Menu con operaciones aritmeticas
+
+def sumar(a, b):
+    return a + b
+
+def restar(a, b):
+    return a - b
+
+def multiplicar(a, b):
+    return a * b
+
+def dividir(a, b):
+    if b != 0:
+        return a / b
+    else:
+        return "Error: división por cero"
+
+while True:
+    print("\n--- Calculadora ---")
+    print("1. Sumar")
+    print("2. Restar")
+    print("3. Multiplicar")
+    print("4. Dividir")
+    print("5. Salir")
+    opcion = input("Seleccione una opción: ")
+
+    if opcion == "5":
+        break
+
+    a = float(input("Ingrese el primer número: "))
+    b = float(input("Ingrese el segundo número: "))
+
+    if opcion == "1":
+        print("Resultado:", sumar(a, b))
+    elif opcion == "2":
+        print("Resultado:", restar(a, b))
+    elif opcion == "3":
+        print("Resultado:", multiplicar(a, b))
+    elif opcion == "4":
+        print("Resultado:", dividir(a, b))
+    else:
+        print("Opción inválida")
+
+
+#5 Control de ventas semanales
+
+def pedir_venta(dia):
+    return float(input(f"Ingrese ventas del {dia}: "))
+
+def calcular_total(lunes, martes, miercoles, jueves, viernes, sabado, domingo):
+    return lunes + martes + miercoles + jueves + viernes + sabado + domingo
+
+def mostrar_resumen(total):
+    promedio = total / 7
+    print("\n--- Resumen de Ventas ---")
+    print("Total de ventas:", total)
+    print("Promedio de ventas:", promedio)
+
+print("=== Control de Ventas ===")
+
+dias = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"]
+
+i = 0
+lunes = martes = miercoles = jueves = viernes = sabado = domingo = 0.0
+
+
+while i < len(dias):
+    if dias[i] == "Lunes":
+        lunes = pedir_venta("Lunes")
+    elif dias[i] == "Martes":
+        martes = pedir_venta("Martes")
+    elif dias[i] == "Miércoles":
+        miercoles = pedir_venta("Miércoles")
+    elif dias[i] == "Jueves":
+        jueves = pedir_venta("Jueves")
+    elif dias[i] == "Viernes":
+        viernes = pedir_venta("Viernes")
+    elif dias[i] == "Sábado":
+        sabado = pedir_venta("Sábado")
+    elif dias[i] == "Domingo":
+        domingo = pedir_venta("Domingo")
+    i += 1
+
+total = calcular_total(lunes, martes, miercoles, jueves, viernes, sabado, domingo)
+mostrar_resumen(total)
+
+
+#6 Factorial con bucle
+
+def calcular_factorial(n):
+    resultado = 1
+    for i in range(1, n + 1):
+        resultado *= i
+    return resultado
+
+n = int(input("Ingrese un número entero no negativo: "))
+print(f"El factorial de {n} es {calcular_factorial(n)}")
+
+
+#7 Suma de números pares hasta n
+def pedir_numero():
+    return int(input("Ingrese un número entero positivo: "))
+
+def sumar_pares(n):
+    suma = 0
+    for i in range(2, n + 1, 2):
+        suma += i
+    return suma
+
+def mostrar_resultado(suma):
+    print("La suma de los números pares es:", suma)
+
+n = pedir_numero()
+resultado = sumar_pares(n)
+mostrar_resultado(resultado)
+
+#8 Verificar si una palabra es palíndromo
+
+def pedir_palabra():
+    return input("Ingrese una palabra: ")
+
+def es_palindromo(palabra):
+    # Comprobamos manualmente con bucle y condicional
+    for i in range(len(palabra) // 2):
+        if palabra[i] != palabra[-(i+1)]:
+            return False  # Si una letra no coincide, ya no es palíndromo
+    return True  # Si todas coinciden, sí lo es
+
+def mostrar_resultado(palabra, resultado):
+    if resultado:
+        print(f"{palabra} es un palíndromo")
+    else:
+        print(f"{palabra} NO es un palíndromo")
+
+palabra = pedir_palabra()
+resultado = es_palindromo(palabra)
+mostrar_resultado(palabra, resultado)
+
+
+#9 Conversión de temperaturas Celsius → Fahrenheit
+
+def pedir_cantidad():
+    return int(input("¿Cuántas temperaturas desea convertir? "))
+
+def convertir_celsius_a_fahrenheit(c):
+    return (c * 9/5) + 32
+
+def mostrar_conversion(c, f):
+    print(f"{c}°C  =  {f}°F")
+
+cantidad = pedir_cantidad()
+
+i = 0
+while i < cantidad:
+    c = float(input("Ingrese temperatura en °C: "))
+    f = convertir_celsius_a_fahrenheit(c)
+    mostrar_conversion(c, f)
+    i += 1
+
+
+#10 Tabla de multiplicar
+def pedir_numero():
+    return int(input("Ingrese un número entero: "))
+
+def generar_tabla(n):
+    for i in range(1, 11):
+        print(f"{n} x {i} = {n * i}")
+
+def mostrar_tabla(n):
+    print(f"\n--- Tabla de multiplicar del {n} ---")
+    generar_tabla(n)
+
+n = pedir_numero()
+mostrar_tabla(n)
+
+
+#11 Contar dígitos en un número
+
+def pedir_numero():
+    return int(input("Ingrese un número entero positivo: "))
+
+def contar_digitos(n):
+    contador = 0
+    while n > 0:
+        n //= 10
+        contador += 1
+    return contador
+
+def mostrar_resultado(digitos):
+    print("Cantidad de dígitos:", digitos)
+
+n = pedir_numero()
+digitos = contar_digitos(n)
+mostrar_resultado(digitos)
+
+
+#12 Verificar si un número es primo
+
+def pedir_numero():
+    return int(input("Ingrese un número entero: "))
+
+def es_primo(n):
+    if n < 2:
+        return False
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+def mostrar_resultado(n, resultado):
+    if resultado:
+        print(n, "es un número primo")
+    else:
+        print(n, "NO es un número primo")
+
+n = pedir_numero()
+resultado = es_primo(n)
+mostrar_resultado(n, resultado)
+
+
+#13 Separar números pares e impares
+
+def pedir_numero():
+    return int(input("Ingrese un número entero positivo: "))
+
+def separar_pares_impares(n):
+    pares, impares = [], []
+    for i in range(1, n+1):
+        if i % 2 == 0:
+            pares.append(i)
+        else:
+            impares.append(i)
+    return pares, impares
+
+def mostrar_listas(pares, impares):
+    print("\nNúmeros pares:", pares)
+    print("Números impares:", impares)
+
+n = pedir_numero()
+pares, impares = separar_pares_impares(n)
+mostrar_listas(pares, impares)
+
+
+#14 Control de temperatura
+
+def pedir_datos():
+    actual = int(input("Ingrese temperatura actual: "))
+    deseada = int(input("Ingrese temperatura deseada: "))
+    return actual, deseada
+
+def ajustar_temperatura(actual, deseada):
+    while actual != deseada:
+        actual = random.randint(actual-1, actual+1)  # simulamos cambios
+        if actual > deseada:
+            print(f"Temperatura {actual}°C -> Aire acondicionado encendido")
+        elif actual < deseada:
+            print(f"Temperatura {actual}°C -> Calefacción encendida")
+        time.sleep(1)
+    return actual
+
+def mostrar_final(actual):
+    print(f"\nTemperatura ajustada a {actual}°C (dentro del rango aceptable).")
+
+actual, deseada = pedir_datos()
+final = ajustar_temperatura(actual, deseada)
+mostrar_final(final)
+
+
+#15 Control de iluminación
+
+def pedir_datos():
+    hora = int(input("Ingrese la hora actual (0-23): "))
+    en_casa = input("¿Hay alguien en casa? (s/n): ").lower() == "s"
+    return hora, en_casa
+
+def decidir_luces(hora, en_casa):
+    if 18 <= hora <= 23 or 0 <= hora < 6:  # noche
+        if en_casa:
+            return "Luces encendidas"
+        else:
+            return "Luces apagadas (nadie en casa)"
+    else:  # día
+        return "Luces apagadas (es de día)"
+
+def mostrar_resultado(resultado):
+    print("\n" + resultado)
+
+hora, en_casa = pedir_datos()
+resultado = decidir_luces(hora, en_casa)
+mostrar_resultado(resultado)
+
+
+#16 Riego automático de jardín
+
+def pedir_datos():
+    humedad_actual = int(input("Ingrese humedad actual del suelo (0-100): "))
+    umbral = int(input("Ingrese humedad mínima deseada: "))
+    return humedad_actual, umbral
+
+def controlar_riego(humedad, umbral):
+    while humedad < umbral:
+        print(f"Humedad {humedad}% -> Activando riego...")
+        time.sleep(1)
+        humedad = random.randint(humedad+5, humedad+15)  # simulamos riego
+    return humedad
+
+def mostrar_final(humedad):
+    print(f"\nHumedad estabilizada en {humedad}% (suficiente).")
+
+humedad, umbral = pedir_datos()
+final = controlar_riego(humedad, umbral)
+mostrar_final(final)
+
+
+
+
