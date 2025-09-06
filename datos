@@ -3,7 +3,7 @@ Dylan vecino garcia 02240132042
 
 import math
 import time
-
+import random
 
 # 1. Área y perímetro de figuras (menú)
 
@@ -82,28 +82,35 @@ print(f"Promedio general: {suma/total:.2f}")
 #3 Factorial + pares/impares
 
 
-def factorial(n):
-    resultado = 1
-    for i in range(1, n+1):
-        resultado *= i
-    return resultado
+def pedir_numero():
+    return int(input("Ingrese un número entero positivo: "))
 
-def contar_pares_impares(n):
-    pares = impares = suma_pares = suma_impares = 0
+def calcular_datos(n):
+    factorial = 1
+    pares, impares = 0, 0
+    suma_pares, suma_impares = 0, 0
+
     for i in range(1, n+1):
+        factorial *= i
         if i % 2 == 0:
             pares += 1
             suma_pares += i
         else:
             impares += 1
             suma_impares += i
-    return pares, impares, suma_pares, suma_impares
 
-n = int(input("Ingrese un número: "))
-print(f"Factorial de {n}: {factorial(n)}")
-pares, impares, suma_pares, suma_impares = contar_pares_impares(n)
-print(f"Pares: {pares}, Impares: {impares}")
-print(f"Suma pares: {suma_pares}, Suma impares: {suma_impares}")
+    return factorial, pares, impares, suma_pares, suma_impares
+
+def mostrar_resultado(factorial, pares, impares, suma_pares, suma_impares):
+    print("\n--- Resultados ---")
+    print("Factorial:", factorial)
+    print("Cantidad de pares:", pares, "→ Suma:", suma_pares)
+    print("Cantidad de impares:", impares, "→ Suma:", suma_impares)
+
+n = pedir_numero()
+factorial, pares, impares, suma_pares, suma_impares = calcular_datos(n)
+mostrar_resultado(factorial, pares, impares, suma_pares, suma_impares)
+
 
 
 #4 Menu con operaciones aritmeticas
@@ -195,14 +202,22 @@ mostrar_resumen(total)
 
 #6 Factorial con bucle
 
-def calcular_factorial(n):
-    resultado = 1
-    for i in range(1, n + 1):
-        resultado *= i
-    return resultado
+def pedir_numero():
+    return int(input("Ingrese un número entero no negativo: "))
 
-n = int(input("Ingrese un número entero no negativo: "))
-print(f"El factorial de {n} es {calcular_factorial(n)}")
+def calcular_factorial(n):
+    factorial = 1
+    for i in range(1, n+1):
+        factorial *= i
+    return factorial
+
+def mostrar_resultado(n, factorial):
+    print(f"El factorial de {n} es {factorial}")
+
+n = pedir_numero()
+resultado = calcular_factorial(n)
+mostrar_resultado(n, resultado)
+
 
 
 #7 Suma de números pares hasta n
@@ -351,28 +366,26 @@ mostrar_listas(pares, impares)
 
 #14 Control de temperatura
 
-def pedir_datos():
-    actual = int(input("Ingrese temperatura actual: "))
-    deseada = int(input("Ingrese temperatura deseada: "))
-    return actual, deseada
 
-def ajustar_temperatura(actual, deseada):
-    while actual != deseada:
-        actual = random.randint(actual-1, actual+1)  # simulamos cambios
-        if actual > deseada:
-            print(f"Temperatura {actual}°C -> Aire acondicionado encendido")
-        elif actual < deseada:
-            print(f"Temperatura {actual}°C -> Calefacción encendida")
-        time.sleep(1)
-    return actual
+def obtener_humedad():
+    return random.randint(20, 100)
 
-def mostrar_final(actual):
-    print(f"\nTemperatura ajustada a {actual}°C (dentro del rango aceptable).")
+def regar():
+    print("Activando sistema de riego...")
 
-actual, deseada = pedir_datos()
-final = ajustar_temperatura(actual, deseada)
-mostrar_final(final)
+def monitorear(umbral):
+    while True:
+        humedad = obtener_humedad()
+        print(f"Humedad actual: {humedad}%")
+        
+        if humedad < umbral:
+            regar()
+        else:
+            print("Humedad suficiente, no es necesario regar.")
+            break
 
+umbral = int(input("Ingrese el umbral de humedad deseado (%): "))
+monitorear(umbral)
 
 #15 Control de iluminación
 
@@ -400,24 +413,25 @@ mostrar_resultado(resultado)
 
 #16 Riego automático de jardín
 
-def pedir_datos():
-    humedad_actual = int(input("Ingrese humedad actual del suelo (0-100): "))
-    umbral = int(input("Ingrese humedad mínima deseada: "))
-    return humedad_actual, umbral
+def obtener_bateria():
+    return random.randint(0, 100)
 
-def controlar_riego(humedad, umbral):
-    while humedad < umbral:
-        print(f"Humedad {humedad}% -> Activando riego...")
-        time.sleep(1)
-        humedad = random.randint(humedad+5, humedad+15)  # simulamos riego
-    return humedad
+def mostrar_estado(bateria):
+    if bateria <= 15:
+        print(f"⚠️ Batería baja ({bateria}%) - Conecta el cargador.")
+    elif bateria <= 50:
+        print(f"🔋 Batería media ({bateria}%)")
+    else:
+        print(f"✅ Batería alta ({bateria}%)")
 
-def mostrar_final(humedad):
-    print(f"\nHumedad estabilizada en {humedad}% (suficiente).")
+def monitorear_bateria():
+    while True:
+        bateria = obtener_bateria()
+        mostrar_estado(bateria)
+        if bateria <= 15:
+            break  
 
-humedad, umbral = pedir_datos()
-final = controlar_riego(humedad, umbral)
-mostrar_final(final)
+monitorear_bateria()
 
 
 
