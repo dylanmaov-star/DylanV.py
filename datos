@@ -2,7 +2,6 @@ Dylan vecino garcia 02240132042
 
 
 import math
-import time
 import random
 
 # 1. Área y perímetro de figuras (menú)
@@ -418,11 +417,11 @@ def obtener_bateria():
 
 def mostrar_estado(bateria):
     if bateria <= 15:
-        print(f"⚠️ Batería baja ({bateria}%) - Conecta el cargador.")
+        print(f" Batería baja ({bateria}%) - Conecta el cargador.")
     elif bateria <= 50:
-        print(f"🔋 Batería media ({bateria}%)")
+        print(f" Batería media ({bateria}%)")
     else:
-        print(f"✅ Batería alta ({bateria}%)")
+        print(f" Batería alta ({bateria}%)")
 
 def monitorear_bateria():
     while True:
